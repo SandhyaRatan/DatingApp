@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace DatingApp.API.Dtos
+{
+    public class UserForUpdateDto
+    {
+        public string introduction { get; set; }
+        public string LookingFor { get; set; }
+        public string interest { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+    }
+}
