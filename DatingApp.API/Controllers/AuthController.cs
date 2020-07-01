@@ -31,7 +31,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto user)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             //can remove modelstate and [frombody] if ApiContrller is user
             if (!ModelState.IsValid)
@@ -39,20 +39,19 @@ namespace DatingApp.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            user.UserName = user.UserName.ToLower();
-            if(await _authRepository.UserExist(user.UserName))
+            userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
+            if(await _authRepository.UserExist(userForRegisterDto.UserName))
             {
                 return BadRequest("User exist");
             }
 
-            var userToCreate = new User
-            {
-                UserName = user.UserName
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
-            var createdUser = await _authRepository.Register(userToCreate, user.Password);
+            var createdUser = await _authRepository.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new { Controller = "Users", id = createdUser.Id }, userToReturn);
         }
 
         [HttpPost("login")]
