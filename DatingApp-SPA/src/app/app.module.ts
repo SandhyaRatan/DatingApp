@@ -12,6 +12,8 @@ import { RouterModule} from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { TimeagoModule } from 'ngx-timeago';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
@@ -59,7 +61,9 @@ export function tokenGetter(){
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
+      PaginationModule.forRoot(),
       TabsModule.forRoot(),
+      ButtonsModule.forRoot(),
       TimeagoModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
