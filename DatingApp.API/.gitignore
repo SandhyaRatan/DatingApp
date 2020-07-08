@@ -4,3 +4,4 @@ obj
 *.db
 wwwroot
 appsettings.json
+wwwroot
